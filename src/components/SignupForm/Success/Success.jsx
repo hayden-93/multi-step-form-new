@@ -2,8 +2,9 @@ import React from "react";
 
 const Success = () => {
   return (
-    <div>
-      <h1>Hello</h1>
+    <div className="space-y-4 text-center">
+      <h1>You are all done! Welcome to the LogoIpsum family!</h1>
+      <a href="/">Continue to website</a>
     </div>
   );
 };
