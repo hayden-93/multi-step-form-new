@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import Confirmation from "./Confirmation/Confirmation";
 import PersonalDetails from "./PersonalDetails/PersonalDetails";
 import Success from "./Success/Success";
@@ -12,8 +13,6 @@ export default class Signup extends Component {
     password: "",
     firstName: "",
     lastName: "",
-    country: "",
-    levelOfEducation: "",
   };
 
   prevStep = () => {
@@ -32,16 +31,8 @@ export default class Signup extends Component {
 
   render() {
     const { step } = this.state;
-    const {
-      email,
-      username,
-      password,
-      firstName,
-      lastName,
-      country,
-      levelOfEducation,
-    } = this.state;
-    const values = { email, username, password, firstName, lastName, country };
+    const { email, username, password, firstName, lastName } = this.state;
+    const values = { email, username, password, firstName, lastName };
 
     switch (step) {
       case 1:
