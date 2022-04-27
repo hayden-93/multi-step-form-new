@@ -1,23 +1,32 @@
 # Multi-Step Form
 
-Form with multiple steps and confirmation. Made using Frontend only. Installed React App for usage
+Form with multiple steps and confirmation page.
 
-## Built with
+## Technologies used
 
 - HTML
-- Tailwind CSS
+- CSS
+  - Tailwind
 - JavaScript
+  - React (Create React App)
 
 ## Quick Start
 
-npm i or npm install - this is to ensure all dependencies are up to date
-
-npm start - this will start up your React App
+ Install latest dependencies
+```
+npm i or npm install
+```
+Run the application
+```
+npm start
+```
 
 Install Tailwind CSS
-
+```
 npm install -D tailwindcss postcss autoprefixer
+
 npx tailwindcss init -p
+```
 
 The above installation will create two files, tailwind.config.js and postcss.config.js
 
@@ -69,7 +78,4 @@ Firstly I created a parent directory which I called SignupForm. Upon creating th
 
 - Github - [Hayden Buckley-Smith](https://www.github.com/hayden-93.com)
 - Twitter - [@HBSDev](https://twitter.com/HBSDev)
-
-```
-
-```
+- Website - (https://www.haydenbs.com)
