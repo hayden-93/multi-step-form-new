@@ -1,69 +1,76 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-import Confirmation from "./Confirmation/Confirmation";
-import PersonalDetails from "./PersonalDetails/PersonalDetails";
-import Success from "./Success/Success";
-import UserDetails from "./UserDetails/UserDetails";
+import { Confirmation } from "./Confirmation";
+import { PersonalDetails } from "./PersonalDetails";
+import { Success } from "./Success";
+import { UserDetails } from "./UserDetails";
+import { userSignupSchema } from "../../utils/validation";
 
-export default class Signup extends Component {
-  state = {
-    step: 1,
+export const SignupForm = () => {
+  const [step, setStep] = useState(1);
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     username: "",
     password: "",
-    firstName: "",
-    lastName: "",
+  });
+
+  const next = () => setStep((prevStep) => prevStep + 1);
+
+  const previous = () => setStep((prevStep) => prevStep - 1);
+
+  const handleChange = ({ target }) => {
+    setUser((currentUser) => ({ ...currentUser, [target.name]: target.value }));
   };
 
-  prevStep = () => {
-    const { step } = this.state;
-    this.setState({ step: step - 1 });
-  };
+  const restartForm = () => setStep(1);
 
-  nextStep = () => {
-    const { step } = this.state;
-    this.setState({ step: step + 1 });
-  };
-
-  handleChange = (input) => (e) => {
-    this.setState({ [input]: e.target.value });
-  };
-
-  render() {
-    const { step } = this.state;
-    const { email, username, password, firstName, lastName } = this.state;
-    const values = { email, username, password, firstName, lastName };
-
-    switch (step) {
-      case 1:
-        return (
-          <UserDetails
-            nextStep={this.nextStep}
-            handleChange={this.handleChange}
-            values={values}
-          />
-        );
-      case 2:
-        return (
-          <PersonalDetails
-            prevStep={this.prevStep}
-            nextStep={this.nextStep}
-            handleChange={this.handleChange}
-            values={values}
-          />
-        );
-      case 3:
-        return (
-          <Confirmation
-            prevStep={this.prevStep}
-            nextStep={this.nextStep}
-            values={values}
-          />
-        );
-      case 4:
-        return <Success />;
-      default:
-        break;
+  const handleSubmit = async () => {
+    try {
+      await userSignupSchema.validate(user);
+      setStep(4);
+    } catch (error) {
+      throw new Error("Missing required fields");
     }
+  };
+
+  switch (step) {
+    case 1:
+      return (
+        <UserDetails
+          firstName={user.firstName}
+          lastName={user.lastName}
+          email={user.email}
+          nextStep={next}
+          onChange={handleChange}
+        />
+      );
+
+    case 2:
+      return (
+        <PersonalDetails
+          username={user.username}
+          password={user.password}
+          nextStep={next}
+          previousStep={previous}
+          onChange={handleChange}
+        />
+      );
+
+    case 3:
+      return (
+        <Confirmation
+          user={user}
+          previousStep={previous}
+          onSubmit={handleSubmit}
+        />
+      );
+
+    case 4:
+      return <Success restart={restartForm} />;
+
+    default:
+      throw new Error("Unknown step");
   }
-}
+};
