@@ -22,9 +22,11 @@ npm start
 ```
 
 Install Tailwind CSS
+```
+npm install -D tailwindcss postcss autoprefixer
 
-> npm install -D tailwindcss postcss autoprefixer
-> npx tailwindcss init -p
+npx tailwindcss init -p
+```
 
 The above installation will create two files, tailwind.config.js and postcss.config.js
 
