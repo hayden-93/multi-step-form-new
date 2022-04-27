@@ -46,7 +46,7 @@ Update your index.css file with the following:
 Lastly you want to check that you have installed Tailwind correctly, you can try it out in your index.html file as follows
 
 ```html
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+<h1 className="text-3xl font-bold underline">Hello world!</h1>
 ```
 
 To see how to install Tailwind CSS to your app, you can follow the link here [Tailwind CSS](https://tailwindcss.com/docs/installation)
