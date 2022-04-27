@@ -12,9 +12,14 @@ Form with multiple steps and confirmation page.
 
 ## Quick Start
 
-> npm i or npm install - this is to ensure all dependencies are up to date
->
-> npm start - this will start up your React App
+ Install latest dependencies
+```
+npm i or npm install
+```
+Run the application
+```
+npm start
+```
 
 Install Tailwind CSS
 
