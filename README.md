@@ -4,9 +4,9 @@ Form with multiple steps and confirmation. Made using Frontend only. Installed R
 
 ## Built with
 
-- Semantic HTML5 markup
+- HTML
 - Tailwind CSS
-- [React](https://reactjs.org/) - JS library
+- JavaScript
 
 ## Quick Start
 
