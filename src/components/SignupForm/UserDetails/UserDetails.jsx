@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const UserDetails = ({ nextStep, handleChange, values }) => {
-  const Continue = (e) => {
-    e.preventDefault();
-    nextStep();
-  };
+export const UserDetails = ({
+  firstName,
+  lastName,
+  email,
+  nextStep,
+  onChange,
+}) => {
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    setDisabled(!(firstName && lastName && email));
+  }, [firstName, lastName, email]);
 
   return (
     <div className="space-y-8">
@@ -17,38 +24,46 @@ const UserDetails = ({ nextStep, handleChange, values }) => {
         <div>
           <input
             type="text"
-            placeholder="First Name"
-            values={values.email}
-            onChange={handleChange("firstName")}
-            className="w-full pl-2 rounded"
+            name="firstName"
             required
+            placeholder="First Name"
+            value={firstName}
+            onChange={onChange}
+            className="w-full px-2 text-sm leading-9 rounded-sm"
           />
         </div>
         <div>
           <input
             type="text"
-            placeholder="Last Name"
-            values={values.email}
-            onChange={handleChange("lastName")}
-            className="w-full pl-2 rounded"
+            name="lastName"
             required
+            placeholder="Last Name"
+            value={lastName}
+            onChange={onChange}
+            className="w-full px-2 text-sm leading-9 rounded-sm"
           />
         </div>
         <div>
           <input
             type="email"
-            placeholder="Email address"
-            values={values.email}
-            onChange={handleChange("email")}
-            className="w-full pl-2 rounded"
+            name="email"
             required
+            placeholder="Email address"
+            value={email}
+            onChange={onChange}
+            className="w-full px-2 text-sm leading-9 rounded-sm"
           />
         </div>
         <div className="flex justify-end">
           <button
-            onClick={Continue}
-            type="submit"
-            className="bg-slate-900 text-white rounded py-1 px-4 hover:bg-slate-700"
+            type="button"
+            onClick={nextStep}
+            disabled={disabled}
+            className={`text-white rounded py-1 px-4${
+              disabled
+                ? " bg-slate-400 cursor-not-allowed"
+                : " bg-slate-900 hover:bg-slate-700"
+            }`}
           >
             Next
           </button>
@@ -63,5 +78,3 @@ const UserDetails = ({ nextStep, handleChange, values }) => {
     </div>
   );
 };
-
-export default UserDetails;
