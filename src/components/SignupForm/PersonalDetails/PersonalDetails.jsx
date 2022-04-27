@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const PersonalDetails = ({ prevStep, nextStep, handleChange, values }) => {
-  const Previous = (e) => {
-    e.preventDefault();
-    prevStep();
-  };
+export const PersonalDetails = ({
+  username,
+  password,
+  nextStep,
+  previousStep,
+  onChange,
+}) => {
+  const [disabled, setDisabled] = useState(false);
 
-  const Continue = (e) => {
-    e.preventDefault();
-    nextStep();
-  };
+  useEffect(() => {
+    setDisabled(!(username && password));
+  }, [username, password]);
 
   return (
     <div className="max-w-screen-sm mx-auto py-10 px-24 space-y-2">
@@ -21,26 +23,28 @@ const PersonalDetails = ({ prevStep, nextStep, handleChange, values }) => {
       <div className="space-y-4">
         <input
           type="text"
+          name="username"
           placeholder="Create your Username"
-          values={values.email}
-          onChange={handleChange("username")}
-          className="w-full"
+          value={username}
+          onChange={onChange}
+          className="w-full px-2 text-sm leading-9"
           required
         />
 
         <input
           type="password"
+          name="password"
           placeholder="Choose your Password"
-          values={values.password}
-          onChange={handleChange("password")}
-          className="w-full"
+          value={password}
+          onChange={onChange}
+          className="w-full px-2 text-sm leading-9"
         />
       </div>
       <div className="flex justify-between py-8">
         <div>
           <button
-            onClick={Previous}
-            type="submit"
+            type="button"
+            onClick={previousStep}
             className="bg-slate-900 text-white rounded py-1 px-4 hover:bg-slate-700"
           >
             Go Back
@@ -48,9 +52,14 @@ const PersonalDetails = ({ prevStep, nextStep, handleChange, values }) => {
         </div>
         <div>
           <button
-            onClick={Continue}
-            type="submit"
-            className="bg-slate-900 text-white rounded py-1 px-4 hover:bg-slate-700"
+            type="button"
+            disabled={disabled}
+            onClick={nextStep}
+            className={`text-white rounded py-1 px-4${
+              disabled
+                ? " bg-slate-400 cursor-not-allowed"
+                : " bg-slate-900 hover:bg-slate-700"
+            }`}
           >
             Next
           </button>
@@ -59,5 +68,3 @@ const PersonalDetails = ({ prevStep, nextStep, handleChange, values }) => {
     </div>
   );
 };
-
-export default PersonalDetails;
