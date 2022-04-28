@@ -12,7 +12,7 @@ Form with multiple steps and confirmation page.
 
 ### Screenshots of each step
 
-![Invalid Signup Form](/public/screenshots/invalid_signup.png "Invalid Signup Form")
+![Invalid Signup Form](screenshots/invalid_signup.png "Invalid Signup Form")
 
 ## Author
 
